@@ -1,6 +1,7 @@
 module.exports = function(source, map){
     
-    // Implementation
+    // Cacheable
+    this.cacheable();
     
     return source;
 }
