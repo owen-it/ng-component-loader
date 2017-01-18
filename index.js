@@ -1,7 +1,2 @@
-module.exports = function(source, map){
-    
-    // Cacheable
-    this.cacheable();
-    
-    return source;
-}
+// Export loader
+module.exports = require('./src/loader')
