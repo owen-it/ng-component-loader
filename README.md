@@ -7,7 +7,7 @@ AngularJs component loader for Webpack
 ### Component
 
 ```html
-<!-- ./src/components/head.ng -->
+<!-- ./src/components/pageHeader.ng -->
 <template>
     <h1>My component {{ name }}</h1>
 </template>
@@ -20,14 +20,14 @@ AngularJs component loader for Webpack
 
 <script>
 
-    module.exports = {
+    module.exports = ['pageHeader', {
         // ...
         controller: ($scope) => {
             'ngInject';
 
             $scope.name = 'AngularJs';
         }
-    }
+    }];
 
 </script>
 ```
@@ -35,8 +35,13 @@ AngularJs component loader for Webpack
 ### Using
 ```js
 // .src/app.js
-var head = require('./component.ng');
+var pageHeader = require('./component.ng');
 
-angular.module('app', []).component('head', head);
+angular.module('app', []).component.apply(this, pageHeader);
 
 ```
+```html
+<!-- Page Header -->
+<page-header></page-header>
+```
+
