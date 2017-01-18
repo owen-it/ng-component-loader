@@ -35,9 +35,10 @@ AngularJs component loader for Webpack
 ### Using
 ```js
 // .src/app.js
-var pageHeader = require('./component.ng');
+var pageHeader = require('./componentd/pageHeader.ng');
 
-angular.module('app', []).component.apply(this, pageHeader);
+angular.module('app', [])
+       .component.apply(this, pageHeader);
 
 ```
 ```html
