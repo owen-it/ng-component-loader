@@ -7,6 +7,7 @@ AngularJs component loader for Webpack
 ### Component
 
 ```html
+<!-- ./src/components/head.ng -->
 <template>
     <h1>My component {{ name }}</h1>
 </template>
@@ -33,7 +34,7 @@ AngularJs component loader for Webpack
 
 ### Using
 ```js
-
+// .src/app.js
 var head = require('./component.ng');
 
 angular.module('app', []).component('head', head);
