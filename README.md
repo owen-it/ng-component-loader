@@ -1,3 +1,5 @@
+> Note: Working on it...
+
 # ng-component-loader
 
 AngularJs component loader for Webpack
