@@ -8,7 +8,7 @@
     "url": "https://github.com/owen-it/ng-component-loader.git"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "eslint lib && mocha test/test.js --slow 5000 --timeout 10000"
   },
   "keywords": [
     "angular",
