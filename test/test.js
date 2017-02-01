@@ -10,7 +10,7 @@ describe('ng-component-loader', function(){
     
     var testHTML = '<!DOCTYPE html><html><head></head><body></body></html>'
     var outputDir = path.resolve(__dirname, './output')
-    var loaderPath = 'expose-loader?ngLoader!' + path.resolve(__dirname, '../')
+    var loaderPath = 'expose-loader?ngComponent!' + path.resolve(__dirname, '../index.js')
     var globalConfig = {
         output: {
             path: outputDir,
@@ -74,15 +74,15 @@ describe('ng-component-loader', function(){
         rimraf(outputDir, done)
     })
     
-    it('extrat module', function(done){
+    it('extrat component angularjs', function(done){
 
         test({
             entry: './test/stubs/component.ng'
         }, function(window){
 
-            var module = window.ngModule
+            var component = window.ngComponent
 
-            expect(module.template).to.contain('<h1>{{ title }}<h1>')
+            expect(component.template).to.contain('<h1>{{ title }}<h1>')
 
         })
         
