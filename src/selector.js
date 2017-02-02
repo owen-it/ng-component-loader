@@ -1,10 +1,11 @@
-var path = require('path')
+var path  = require('path')
 var parse = require('./parser')
-var loaderUtils = require('loader-utils')
+var utils = require('loader-utils')
 
-module.exports = function(content){
+module.exports = function(content)
+{
     this.cacheable()
-    var query = loaderUtils.parseQuery(this.query)
+    var query = utils.parseQuery(this.query)
     var filename = path.basename(this.resourcePath)
     var parts = parse(content, filename, this.sourceMap)
     var part = parts[query.type][query.index]

@@ -21,6 +21,10 @@ describe('ng-component-loader', function(){
                 {
                     test: /\.ng$/,
                     loader: loaderPath
+                },
+                {
+                    test: /\.ng$/,
+                    loader: 'style-loader'
                 }
             ]
         }
@@ -35,9 +39,11 @@ describe('ng-component-loader', function(){
 
     function test(options, assert){
         
-        var config = Object.assign({}, globalConfig, options)
+        var opt = Object.assign({}, globalConfig, options)
 
-        webpack(config).run(function(err, stats){
+        var w = webpack(opt)
+
+        w.run(function(err, stats){
             
             console.log(stats)
 
@@ -73,11 +79,71 @@ describe('ng-component-loader', function(){
     beforeEach(function(done){
         rimraf(outputDir, done)
     })
+
+    it('run webpack base', function (done){
+
+        const w = webpack({
+            entry: path.resolve(__dirname, './entry.js'),
+            output: {
+                filename: 'build.js',
+                path: __dirname
+            },
+            module: {
+                rules: [
+                    {
+                         test: /\.ng$/,
+                         loader: loaderPath
+                    }
+                ]
+            }
+        });
+
+        w.run(function(err, stats){
+
+            expect(err).to.be.null
+
+            if (stats.compilation.errors.length) {
+                stats.compilation.errors.forEach(function (err) {
+                    console.error(err.message)
+                })
+            }
+
+            expect(stats.compilation.errors.length).to.be.empty
+
+        })
+
+        // Important! Verify loader progress init
+        //done()
+
+    })
     
     it('extrat component angularjs', function(done){
 
+        var bundle = webpack({
+
+            entry: './../my-component.js',
+            output: {
+                filename: 'output-test.js',
+                path: '/'
+            },
+            module: {
+                rules: [
+                    {
+                        test: /\.ng$/,
+                        loader: 'file-loader'
+                    }
+                ]
+            }
+
+        })
+
+        bundle.run(function(){
+            console.log(arguments)
+        })
+
         test({
-            entry: './test/stubs/component.ng'
+            entry: path.resolve(__dirname, '../my-component.js')
+            // entry: path.resolve(__dirname, './stubs/component.ng')
         }, function(window){
 
             var component = window.ngComponent
