@@ -75,9 +75,29 @@
 
 /***/ }),
 /* 1 */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
-throw new Error("Module build failed: TypeError: request.split is not a function\n    at Object.exports.stringifyRequest (C:\\Users\\anter\\www\\github\\owen-it\\ng-component-loader\\node_modules\\loader-utils\\index.js:121:25)\n    at getRequireString (C:\\Users\\anter\\www\\github\\owen-it\\ng-component-loader\\src\\loader.js:116:22)\n    at getRequire (C:\\Users\\anter\\www\\github\\owen-it\\ng-component-loader\\src\\loader.js:107:27)\n    at C:\\Users\\anter\\www\\github\\owen-it\\ng-component-loader\\src\\loader.js:138:29\n    at Array.forEach (native)\n    at Object.module.exports (C:\\Users\\anter\\www\\github\\owen-it\\ng-component-loader\\src\\loader.js:134:17)");
+
+        var __comp_script__;
+        var __comp_template__;
+        var __comp_styles__;
+    
+            __comp_script__ = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"!!js!./../../src/selector.js?type=script&index=0!./component.ng\""); e.code = 'MODULE_NOT_FOUND';; throw e; }()))
+        
+                var invalidModule = Object.keys(__comp_script__).some(function(key) {
+                    return key !== 'default' && key !== '__esModule';
+                });
+                if(invalidModule){
+                    console.warn('[ng-component-loader] test\stubs\component.ng: named export in *.ng files are ignored')
+                }
+            
+        module.exports = function(injections){
+            var mod = __comp_script__ ? __comp_script__(injections) : {};
+            if(mod.__esModule) mod = mod.default;
+            if(__comp_template__) mod.template = __comp_template__;
+            return mod;
+        }
+    
 
 /***/ }),
 /* 2 */

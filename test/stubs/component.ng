@@ -1,13 +1,10 @@
-<template>
-    <h1> Hello </h1>
-</template>
+<script>
 
-<style>
-
-    @import 'bootstrap/bootstrap.css';
-    
-    h1 {
-        color: #8e8e8e;
+    module.exports = {
+        bidings: {},
+        controller: function(){
+            console.log('uhuuu!!!')
+        }
     }
 
-</style>
+</script>

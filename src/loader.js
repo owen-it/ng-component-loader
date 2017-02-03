@@ -26,7 +26,7 @@ module.exports = function(content) {
         script: 'js'
     }
 
-    this.cacheable();
+    this.cacheable()
 
     var context = this
     var query = utils.parseQuery(this.query)
@@ -49,11 +49,11 @@ module.exports = function(content) {
 
     var parts = parse(content, fileName, this.sourceMap)
     var hasLocalStyle = false
-    var output = [
-        'var __comp_script__;',
-        'var __comp_template__;',
-        'var __comp_styles__ = {};'
-    ].join('')
+    var output = `
+        var __comp_script__;
+        var __comp_template__;
+        var __comp_styles__;
+    `
 
     function getRewrite(type, scoped)
     {
@@ -68,13 +68,43 @@ module.exports = function(content) {
         }
     }
 
+    function addCssModulesToLoader(loader, part, index)
+    {
+        if(!part.module) return loader
+
+        return loader.replace(/((?:^|!)css(?:-loader)?)(\?[^!]*)?/, function (m, $1, $2) {
+            var option = utils.parseQuery($2)
+
+            option.module = true
+            option.importLoaders = true
+            option.localIdentName = '[hash:base64]'
+
+            if(index !== -1){
+                option.localIdentName += `_${index}`
+            }
+
+            return `${$1}?${JSON.stringify(option)}`
+        })
+    }
+
     function getLoaderString(type, part, index, scoped)
     {
         var lang = part.lang || defaultLang[type]
         var loader = loaders[lang]
         var rewrite = getRewrite(type, scoped)
+        var injectString = (type === 'script' && query.inject) ? 'inject' : ''
+        var templateLoader = require.resolve('./template-loader')
 
-        dd(type, part, index, scoped)
+        switch(type){
+            case 'template':
+                return `${defaultLoaders.html}!${rewrite + templateLoader}?raw&engine=${lang}!`
+            case 'style':
+                loader = addCssModulesToLoader(defaultLoaders.css, part, index)
+                return `${loader}!${rewrite + lang}!`
+            case 'script':
+                return `${injectString + lang}!`
+        }
+
     }
 
     function getRequireForImportString(type, req, scoped)
@@ -117,7 +147,7 @@ module.exports = function(content) {
             '!!', getLoaderString(type, part, index, scoped),
             getSelectorString(type, index || 0),
             utils.getRemainingRequest(context)
-        ])
+        ].join(''))
     }
 
     parts.styleImports.forEach(function(part){
@@ -138,93 +168,59 @@ module.exports = function(content) {
         var requireString = getRequire(
             'style', style, i, style.scoped, style.module
         )
+
+        output += setCssModule(style, requireString)
     })
 
+    var script
+    if(parts.script.length){
+        script = parts.script[0]
+ 
+        output += `
+            __comp_script__ = ${
+                script.src 
+                ? getRequireForImport('string', script, 0)
+                : getRequire('script', script, 0)
+            }
+        `
 
-};
+        if(!this.minimize){
+            output += `
+                var invalidModule = Object.keys(__comp_script__).some(function(key) {
+                    return key !== 'default' && key !== '__esModule';
+                });
+                if(invalidModule){
+                    console.warn('[ng-component-loader] ${path.relative(process.cwd(), filePath)}: named export in *.ng files are ignored')
+                }
+            `
+        }
+    }
+
+    var template
+    if(parts.template.length){
+        template = parts.template[0]
+
+        output += `
+            __comp_template__ = ${
+                template.src 
+                ? getRequireForImport('template', template, hasLocalStyle)
+                : getRequire('template', template, 0, hasLocalStyle)
+            }
+        `
+    }
+
+    output += `
+        module.exports = function(injections){
+            var mod = __comp_script__ ? __comp_script__(injections) : {};
+            if(mod.__esModule) mod = mod.default;
+            if(__comp_template__) mod.template = __comp_template__;
+            return mod;
+        }
+    `
+
+    console.log(output)
+
+    return output;
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-var i = 0;
-function dd(...args){
-    console.log(`---------------------${++i}-------------------------\n\n`)
-    args.forEach((log, i) => {
-        console.log(`${i}: `, log)
-    })
-    console.log('\n\n-----------------------------------------------\n\n')    
 }
-function dt(title, ...args){
-    console.log(`\n\n-----------------------------------------------`)
-    console.log(`                   ${title}`)
-    dd(...args);
-}
-
-
-  // this.cacheable && this.cacheable();
-
-  // var callback = this.async();
-  // var opt = utils.parseQuery(this.query);
-
-  // function exportContent(content) {
-  //   if (opt.raw) {
-  //     callback(null, content);
-  //   } else {
-  //     callback(null, "module.exports = " + JSON.stringify(content));
-  //   }
-  // }
-
-  // if(!opt.engine) {
-  //   opt.engine = extname(this.request).substr(1).toLowerCase();
-  // }
-
-  // if(!consolidate[opt.engine]) {
-  //   throw new Error("Engine '"+ opt.engine +"' isn't available in Consolidate.js");
-  // }
-
-  // opt.filename = this.resourcePath;
-
-  // consolidate[opt.engine].render(content, opt, function(err, html) {
-  //   if(err) {
-  //     throw err;
-  //   }
-  //   exportContent(html);
-  // });
