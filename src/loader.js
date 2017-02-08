@@ -18,10 +18,12 @@ module.exports = function(content) {
         html: '',
         css: 'css-loader',
         js: 'babel-loader?' + JSON.stringify({
-            presents: ['es2015'],
-            plugins: ['transform-runtime'],
-            coments: false
+            presets: [ 'es2015' ],
+            //plugins: [ 'transform-runtime' ],
+            comments: false 
         })
+
+        // presets[]=es2015&plugins[]=transform-runtime&comments=false
     }
 
     var defaultLang = {
@@ -246,7 +248,7 @@ module.exports = function(content) {
     // Adicionar o primeiro if do metodo getLoaderString 
     // para carregar o loader correto para tipos de arquivo
     // java script.
-    console.log(output)
+    //console.log(output)
 
     return output;
 
