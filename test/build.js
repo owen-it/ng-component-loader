@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 3);
+/******/ 	return __webpack_require__(__webpack_require__.s = 4);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -71,7 +71,7 @@
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global) {module.exports = global["ngComponent"] = __webpack_require__(1);
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ }),
 /* 1 */
@@ -82,7 +82,7 @@
         var __comp_template__;
         var __comp_styles__;
     
-            __comp_script__ = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"!!js!./../../src/selector.js?type=script&index=0!./component.ng\""); e.code = 'MODULE_NOT_FOUND';; throw e; }()))
+            __comp_script__ = __webpack_require__(2)
         
                 var invalidModule = Object.keys(__comp_script__).some(function(key) {
                     return key !== 'default' && key !== '__esModule';
@@ -101,6 +101,12 @@
 
 /***/ }),
 /* 2 */
+/***/ (function(module, exports) {
+
+throw new Error("Module build failed: ReferenceError: [BABEL] C:\\Users\\anter\\www\\github\\owen-it\\ng-component-loader\\test\\stubs\\component.ng: Unknown option: base.presents. Check out http://babeljs.io/docs/usage/options/ for more information about options.\n\nA common cause of this error is the presence of a configuration options object without the corresponding preset name. Example:\n\nInvalid:\n  `{ presets: [{option: value}] }`\nValid:\n  `{ presets: [['presetName', {option: value}]] }`\n\nFor more detailed information on preset configuration, please see http://babeljs.io/docs/plugins/#pluginpresets-options.\n    at Logger.error (C:\\Users\\anter\\www\\github\\owen-it\\ng-component-loader\\node_modules\\babel-core\\lib\\transformation\\file\\logger.js:41:11)\n    at OptionManager.mergeOptions (C:\\Users\\anter\\www\\github\\owen-it\\ng-component-loader\\node_modules\\babel-core\\lib\\transformation\\file\\options\\option-manager.js:225:20)\n    at OptionManager.init (C:\\Users\\anter\\www\\github\\owen-it\\ng-component-loader\\node_modules\\babel-core\\lib\\transformation\\file\\options\\option-manager.js:367:12)\n    at File.initOptions (C:\\Users\\anter\\www\\github\\owen-it\\ng-component-loader\\node_modules\\babel-core\\lib\\transformation\\file\\index.js:216:65)\n    at new File (C:\\Users\\anter\\www\\github\\owen-it\\ng-component-loader\\node_modules\\babel-core\\lib\\transformation\\file\\index.js:139:24)\n    at Pipeline.transform (C:\\Users\\anter\\www\\github\\owen-it\\ng-component-loader\\node_modules\\babel-core\\lib\\transformation\\pipeline.js:46:16)\n    at transpile (C:\\Users\\anter\\www\\github\\owen-it\\ng-component-loader\\node_modules\\babel-loader\\lib\\index.js:38:20)\n    at Object.module.exports (C:\\Users\\anter\\www\\github\\owen-it\\ng-component-loader\\node_modules\\babel-loader\\lib\\index.js:133:12)");
+
+/***/ }),
+/* 3 */
 /***/ (function(module, exports) {
 
 var g;
@@ -127,7 +133,7 @@ module.exports = g;
 
 
 /***/ }),
-/* 3 */
+/* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
 

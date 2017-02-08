@@ -2,13 +2,17 @@ var utils = require('loader-utils')
 var path = require('path')
 var parse = require('./parser')
 var selector = require.resolve('./selector')
+var u = require('./utils')
 
+var rewriterInjectRE = /\b((css|(ng-)?html)(-loader)?(\?[^!]+)?)(?:!|$)/
 var rewrites = {
     template: require.resolve('./template-rewrite'),
     style: require.resolve('./style-rewrite')
 }
 
 module.exports = function(content) {
+    
+    this.cacheable()
 
     var defaultLoaders = {
         html: '',
@@ -25,8 +29,6 @@ module.exports = function(content) {
         style: 'css',
         script: 'js'
     }
-
-    this.cacheable()
 
     var context = this
     var query = utils.parseQuery(this.query)
@@ -95,15 +97,38 @@ module.exports = function(content) {
         var injectString = (type === 'script' && query.inject) ? 'inject' : ''
         var templateLoader = require.resolve('./template-loader')
 
-        switch(type){
-            case 'template':
-                return `${defaultLoaders.html}!${rewrite + templateLoader}?raw&engine=${lang}!`
-            case 'style':
-                loader = addCssModulesToLoader(defaultLoaders.css, part, index)
-                return `${loader}!${rewrite + lang}!`
-            case 'script':
-                return `${injectString + lang}!`
+        if(loader != undefined){
+            if(Array.isArray(loader)){
+                loader = u.stringifyLoaders(loader)
+            }
+
+            if(type == 'style'){
+                loader = addCssModulesToLoader(loader, part, index)
+            }
+
+            if(rewriterInjectRE.test(loader)){
+                loader = loader.replace(rewriterInjectRE, (m, $1) => {
+                    return u.ensureBand($1) + rewrite
+                })
+            } else {
+                loader = u.ensureBand(loader) + rewrite
+            }
+
+            return injectString + u.ensureBand(loader)
+
+        } else {
+            switch(type){
+                case 'template':
+                    return `${defaultLoaders.html}!${rewrite + templateLoader}?raw&engine=${lang}!`
+                case 'style':
+                    loader = addCssModulesToLoader(defaultLoaders.css, part, index)
+                    return `${loader}!${rewrite + lang}!`
+                case 'script':
+                    return `${injectString + lang}!`
+            }
         }
+
+
 
     }
 
@@ -218,6 +243,9 @@ module.exports = function(content) {
         }
     `
 
+    // Adicionar o primeiro if do metodo getLoaderString 
+    // para carregar o loader correto para tipos de arquivo
+    // java script.
     console.log(output)
 
     return output;
