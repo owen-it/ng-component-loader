@@ -3,7 +3,9 @@
     module.exports = {
         bidings: {},
         controller: function(){
-            console.log('uhuuu!!!')
+            return {
+                msg: 'It work!'
+            }
         }
     }
 

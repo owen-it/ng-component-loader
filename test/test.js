@@ -5,29 +5,26 @@ var expect = require('chai').expect
 var rimraf = require('rimraf')
 var hash = require('hash-sum')
 var extract = require('extract-text-webpack-plugin')
+var jsdom = require('jsdom')
 
 describe('ng-component-loader', function(){
     
-    var testHTML = '<!DOCTYPE html><html><head></head><body></body></html>'
     var outputDir = path.resolve(__dirname, './output')
     var loaderPath = 'expose-loader?ngComponent!' + path.resolve(__dirname, '../index.js')
     var globalConfig = {
-        output: {
-            path: outputDir,
-            filename: 'build-test.js'
-        },
-        module: {
-            rules: [
-                {
-                    test: /\.ng$/,
-                    loader: loaderPath
-                },
-                {
-                    test: /\.ng$/,
-                    loader: 'style-loader'
-                }
-            ]
-        }
+        entry: path.resolve(__dirname, './entry.js'),
+            output: {
+                filename: 'build.js',
+                path: outputDir
+            },
+            module: {
+                rules: [
+                    {
+                         test: /\.ng$/,
+                         loader: loaderPath
+                    }
+                ]
+            }
     }
 
     function getFile(file, callback){
@@ -76,27 +73,46 @@ describe('ng-component-loader', function(){
         
     }
     
-    beforeEach(function(done){
-        rimraf(outputDir, done)
-    })
+   // beforeEach(function(done){
+        //rimraf(outputDir, done)
+   // })
 
     it('run webpack base', function (done){
 
-        const w = webpack({
-            entry: path.resolve(__dirname, './entry.js'),
-            output: {
-                filename: 'build.js',
-                path: __dirname
-            },
-            module: {
-                rules: [
-                    {
-                         test: /\.ng$/,
-                         loader: loaderPath
-                    }
-                ]
-            }
-        });
+        build({}, window => {
+            var component = window.ngComponent
+
+            console.log(component)
+
+            //expect(component.controller().msg).to.be.eq('It work!')
+        })
+
+        //done()
+
+    })
+    
+    // ('extrat component angularjs', function(done){
+
+    //     test({
+    //         entry: path.resolve(__dirname, '../my-component.js')
+    //         // entry: path.resolve(__dirname, './stubs/component.ng')
+    //     }, function(window){
+
+    //         var component = window.ngComponent
+
+    //         expect(component.template).to.contain('<h1>{{ title }}<h1>')
+
+    //     })
+        
+    //     done()
+    // })
+
+    function build(options, assert)
+    {
+
+        var opt = Object.assign({}, globalConfig, options)
+
+        const w = webpack(opt);
 
         w.run(function(err, stats){
 
@@ -110,49 +126,25 @@ describe('ng-component-loader', function(){
 
             expect(stats.compilation.errors.length).to.be.empty
 
-        })
+            getFile('build.js', js => {
 
-        // Important! Verify loader progress init
-        //done()
+                jsdom.env({
+                    html: `<!DOCTYPE html><html><head></head><body></body></html>`, 
+                    src: [js],
+                    done: function (err, window){
+                        if(err){
+                            console.log(err[0].data.error.stack)
 
-    })
-    
-    it('extrat component angularjs', function(done){
+                            expect(err).to.be.null
+                        }
 
-        var bundle = webpack({
-
-            entry: './../my-component.js',
-            output: {
-                filename: 'output-test.js',
-                path: '/'
-            },
-            module: {
-                rules: [
-                    {
-                        test: /\.ng$/,
-                        loader: 'file-loader'
+                        assert(window)
                     }
-                ]
-            }
+                })
+                
+            })
 
         })
-
-        bundle.run(function(){
-            console.log(arguments)
-        })
-
-        test({
-            entry: path.resolve(__dirname, '../my-component.js')
-            // entry: path.resolve(__dirname, './stubs/component.ng')
-        }, function(window){
-
-            var component = window.ngComponent
-
-            expect(component.template).to.contain('<h1>{{ title }}<h1>')
-
-        })
-        
-        done()
-    })
+    }
     
 })

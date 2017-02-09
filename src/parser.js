@@ -86,11 +86,13 @@ module.exports = function(content, filename, needMap)
         var result
         
         if( type === 'script' ){
+
             result = [
                 commentScript(content.slice(0, start), lang),
                 deIndent(content.slice(start, end)),
                 commentScript(content.slice(end), lang)
             ].join('')
+
         } else {
             var lineOffset = content.slice(0, start).split(splitRE).length - 1
             result = deIndent(content.slice(start, end));
@@ -126,7 +128,7 @@ module.exports = function(content, filename, needMap)
             lang: lang,
             scoped: scoped,
             module: module,
-            conent: content,
+            content: result,
             map: map && map.toJSON(),
             warnings: []
         })
@@ -145,9 +147,9 @@ function commentScript(content, lang){
     var symbol = getCommentSymbol(lang)
     var lines = content.split(splitRE)
     
-    lines.map(function (line, index) {
+    return lines.map(function (line, index) {
 
-        if(index == lines.length - 1 && emptyRE.test(line)){
+        if(index === lines.length - 1 && emptyRE.test(line)){
             return ''
         } else {
             return symbol + (emptyRE.test(line) ? '' : ' ' + line)
@@ -155,7 +157,6 @@ function commentScript(content, lang){
         
     }).join('\n')
     
-    return lines
 }
 
 function getCommentSymbol(lang){

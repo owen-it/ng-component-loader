@@ -129,9 +129,6 @@ module.exports = function(content) {
                     return `${injectString + lang}!`
             }
         }
-
-
-
     }
 
     function getRequireForImportString(type, req, scoped)
@@ -237,6 +234,11 @@ module.exports = function(content) {
     }
 
     output += `
+        module.exports = __comp_script__ || {};
+        
+    `
+
+    output += `
         module.exports = function(injections){
             var mod = __comp_script__ ? __comp_script__(injections) : {};
             if(mod.__esModule) mod = mod.default;
@@ -245,12 +247,6 @@ module.exports = function(content) {
         }
     `
 
-    // Adicionar o primeiro if do metodo getLoaderString 
-    // para carregar o loader correto para tipos de arquivo
-    // java script.
-    //console.log(output)
-
     return output;
-
 
 }

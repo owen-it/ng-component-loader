@@ -9,6 +9,6 @@ module.exports = function(content)
     var filename = path.basename(this.resourcePath)
     var parts = parse(content, filename, this.sourceMap)
     var part = parts[query.type][query.index]
-    
+
     this.callback(null, part.content, part.map)
 }
