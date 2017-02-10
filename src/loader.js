@@ -235,17 +235,29 @@ module.exports = function(content) {
 
     output += `
         module.exports = __comp_script__ || {};
-        
-    `
-
-    output += `
-        module.exports = function(injections){
-            var mod = __comp_script__ ? __comp_script__(injections) : {};
-            if(mod.__esModule) mod = mod.default;
-            if(__comp_template__) mod.template = __comp_template__;
-            return mod;
+        if(module.exports._esModule) module.exports = module.exports.default;
+        if(__comp_template__){
+            __comp_script__.template = __comp_template__;
         }
     `
+
+    if(!this.minimize && process.env.NODE_ENV !== 'production' && (parts.script.length || parts.template.length ) ){
+        var hotId = JSON.stringify(`${moduleId}/${fileName}`)
+        output += `
+            if(module.hot){ (function(injections){
+                module.hot.accept();
+                var hotAPI = require('vue-hot-reload-api');
+                hotAPI.install(require('angular'), false);
+                if(!hotAPI.compatible) return;
+                var id = ${hotId};
+                if(!module.hot.data){
+                    hotAPI.createRecord(id, module.exports);
+                } else {
+                    hotAPI.update(id, module.exports, __comp_template__);
+                }
+            })() }
+        `
+    }
 
     return output;
 
