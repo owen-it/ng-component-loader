@@ -77,12 +77,24 @@ describe('ng-component-loader', function(){
         rimraf(outputDir, done)
     })
 
-    it('run webpack base', function (done){
+    it('Should return message', function (done){
 
         build({}, window => {
-            var component = window.ngComponent
+            var component = window.ngComponent[1]
 
-            expect(component[1].controller().msg).to.be.eq('It work!')
+            expect(component.controller().msg).to.be.eq('Working!!')
+
+            done()
+        })
+
+    })
+
+    it('Should return template', function (done){
+
+        build({}, window => {
+            var component = window.ngComponent[1]
+
+            expect(component.template).to.contain('{{ msg }}')
 
             done()
         })

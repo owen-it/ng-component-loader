@@ -10,7 +10,7 @@
         bidings: {},
         controller: function(){
             return {
-                msg: 'It work!'
+                msg: 'Working!!'
             }
         }
     }]

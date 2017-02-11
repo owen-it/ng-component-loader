@@ -32,7 +32,7 @@ module.exports = function (css, map) {
   var cb = this.async()
 
   var query = loaderUtils.parseQuery(this.query)
-  var options = this.options.vue || {}
+  var options = this.options.ng || {}
   var autoprefixOptions = options.autoprefixer
   var postcssOptions = options.postcss
 

@@ -20,6 +20,8 @@ module.exports = function(content)
         options.engine = path.extname(this.request).substr(1).toLowerCase()
     }
 
+    console.log(options.engine)
+
     if(!consolidate[options.engine]){
         return callback(new Error(
             `Template engine ${options.engine} isn't avaliable in Consolidate.js`
