@@ -73,39 +73,21 @@ describe('ng-component-loader', function(){
         
     }
     
-   // beforeEach(function(done){
-        //rimraf(outputDir, done)
-   // })
+    beforeEach(function(done){
+        rimraf(outputDir, done)
+    })
 
     it('run webpack base', function (done){
 
         build({}, window => {
             var component = window.ngComponent
 
-            console.log(component)
+            expect(component[1].controller().msg).to.be.eq('It work!')
 
-            //expect(component.controller().msg).to.be.eq('It work!')
+            done()
         })
 
-        //done()
-
     })
-    
-    // ('extrat component angularjs', function(done){
-
-    //     test({
-    //         entry: path.resolve(__dirname, '../my-component.js')
-    //         // entry: path.resolve(__dirname, './stubs/component.ng')
-    //     }, function(window){
-
-    //         var component = window.ngComponent
-
-    //         expect(component.template).to.contain('<h1>{{ title }}<h1>')
-
-    //     })
-        
-    //     done()
-    // })
 
     function build(options, assert)
     {

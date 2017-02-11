@@ -1,12 +1,18 @@
+<template>
+    <div>
+        <h1> {{ msg }} </h1>
+    </div>
+</template>
+
 <script>
 
-    module.exports = {
+    module.exports = ['componentA', {
         bidings: {},
         controller: function(){
             return {
                 msg: 'It work!'
             }
         }
-    }
+    }]
 
 </script>
