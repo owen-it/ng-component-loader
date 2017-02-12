@@ -72,6 +72,7 @@ module.exports = function(content) {
 
     function addCssModulesToLoader(loader, part, index)
     {
+
         if(!part.module) return loader
 
         return loader.replace(/((?:^|!)css(?:-loader)?)(\?[^!]*)?/, function (m, $1, $2) {
@@ -228,6 +229,35 @@ module.exports = function(content) {
                 ? getRequireForImport('template', template, hasLocalStyle)
                 : getRequire('template', template, 0, hasLocalStyle)
             }
+        `
+    }
+
+    if(query.hijacked){
+        output += `
+            var angular = require('angular');
+            var __ng__ = angular.module;
+            
+            function __module__(){
+                var hijacked  = __ng__.apply(this, arguments);
+
+                if(hijacked.components){
+                    return hijacked;
+                }
+
+                function __components__ (components) {
+                    if(angulas.isObject(components)){
+                        Object.keys(components).forEach(function(name){
+                            hijacked.component(name, components[name]);
+                        })
+                    }
+                }
+
+                hijacked.components = __components__;
+
+                return hijacked;
+            }
+
+            angular.module = __module__;
         `
     }
 
