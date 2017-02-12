@@ -5,7 +5,6 @@ var path = require('path')
 module.exports = function(content)
 {
     this.cacheable()
-
     var callback = this.async()
     var options = utils.parseQuery(this.query)
     var ngOptions = this.options.ng 
@@ -19,8 +18,6 @@ module.exports = function(content)
     if(!options.engine){
         options.engine = path.extname(this.request).substr(1).toLowerCase()
     }
-
-    console.log(options.engine)
 
     if(!consolidate[options.engine]){
         return callback(new Error(

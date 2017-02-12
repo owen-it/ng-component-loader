@@ -231,14 +231,13 @@ module.exports = function(content) {
         `
     }
 
-    output += `
+    output +=  `
         module.exports = __comp_script__ || {};
         if(module.exports._esModule) module.exports = module.exports.default;
         if(__comp_template__){
             if(Array.isArray(__comp_script__)) __comp_script__[1].template = __comp_template__;
             else __comp_script__.template = __comp_template__;
-        }
-    `
+        }`
 
     return output;
 
