@@ -2,8 +2,7 @@
 
 # ng-component-loader
 
-AngularJs component loader for Webpack
-
+`ng-component-loader` is a loader for Webpack that can transform Angular components into a plain JavaScript module.
 
 ## Install
 
