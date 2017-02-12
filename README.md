@@ -4,9 +4,46 @@
 
 AngularJs component loader for Webpack
 
-# Example
 
-### Component
+## Install
+
+```
+npm install --save-dev ng-component-loader 
+```
+
+## Usage:
+
+Use the loader either via your webpack config, CLI or inline.
+
+#### Via webpack config (recommended)
+
+```
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.ng$/,
+        use: [ 'ng-component-loader' ]
+      }
+    ]
+  }
+}
+```
+
+#### Passing parameters: 
+
+```
+	{
+        test: /\.ng$/, 
+        use: ['ng-component-loader?map=false']
+    }
+```
+
+### In your application
+
+#### Component
+
+Create your component file.
 
 ```html
 <!-- ./src/components/page-header.ng -->
@@ -32,15 +69,17 @@ AngularJs component loader for Webpack
 </script>
 ```
 
-### Using
+#### Applying component
 ```js
 // .src/app.js
-var pageHeader = require('./componentd/page-header');
+
+imoprt pageHeader from './components/page-header';
 
 angular.module('app', [])
        .component.apply(angular, pageHeader);
 
 ```
+
 ```html
 <!-- Page Header -->
 <page-header></page-header>
