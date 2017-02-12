@@ -9,14 +9,14 @@ AngularJs component loader for Webpack
 ### Component
 
 ```html
-<!-- ./src/components/pageHeader.ng -->
+<!-- ./src/components/page-header.ng -->
 <template>
     <h1>My component {{ name }}</h1>
 </template>
 
 <style>
     h1 {
-        color: blue;
+        color: #8f8f8f;
     }
 </style>
 
@@ -25,8 +25,6 @@ AngularJs component loader for Webpack
     module.exports = ['pageHeader', {
         // ...
         controller: ($scope) => {
-            'ngInject';
-
             $scope.name = 'AngularJs';
         }
     }];
@@ -37,10 +35,10 @@ AngularJs component loader for Webpack
 ### Using
 ```js
 // .src/app.js
-var pageHeader = require('./componentd/pageHeader.ng');
+var pageHeader = require('./componentd/page-header');
 
 angular.module('app', [])
-       .component.apply(this, pageHeader);
+       .component.apply(angular, pageHeader);
 
 ```
 ```html
