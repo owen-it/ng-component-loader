@@ -2,7 +2,7 @@
 
 # ng-component-loader
 
-`ng-component-loader` is a loader for Webpack that can transform Angular components into a plain JavaScript module.
+`ng-component-loader` is a loader for Webpack that can transform Angular Components into a plain JavaScript module.
 
 ## Understanding Components
 
@@ -10,12 +10,13 @@ In AngularJS, a Component is a special kind of directive that uses a simpler con
 
 ## What is Webpack?
 
-webpack is a tool to build JavaScript modules in your application. To start using `webpack` from its [cli](/api/cli) or [api](/api/node), follow the [Installation instructions](/guides/installation).
-webpack simplifies your workflow by quickly constructing a dependency graph of your application and bundling them in the right order. webpack can be configured to customise optimisations to your code, to split vendor/css/js code for production, run a development server that hot-reloads your code without page refresh and many such cool features. Learn more about [why you should use webpack](/guides/why-webpack).
+webpack is a tool to build JavaScript modules in your application. To start using `webpack` from its [cli](https://webpack.js.org/api/cli) or [api](https://webpack.js.org/api/node), follow the [Installation instructions](https://webpack.js.org/guides/installation).
+webpack simplifies your workflow by quickly constructing a dependency graph of your application and bundling them in the right order. webpack can be configured to customise optimisations to your code, to split vendor/css/js code for production, run a development server that hot-reloads your code without page refresh and many such cool features. Learn more about [why you should use webpack](https://webpack.js.org/guides/why-webpack).
 
 ## Understanding Loaders 
 
 Loaders are transformations that are applied on a resource file of your application. They are functions (running in Node.js) that take the source of a resource file as the parameter and return the new source.
+Learn more about [loaders](https://webpack.js.org/concepts/loaders/).
 
 ## Install
 
