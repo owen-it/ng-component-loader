@@ -1,6 +1,6 @@
 {
   "name": "ng-component-loader",
-  "version": "1.0.5",
+  "version": "1.0.11",
   "description": "AngularJs component loader for Webpack",
   "main": "index.js",
   "repository": {
@@ -39,7 +39,8 @@
     "postcss": "^5.0.10",
     "postcss-selector-parser": "^2.0.0",
     "source-map": "^0.5.6",
-    "html-loader": "^0.4.4"
+    "html-loader": "^0.4.4",
+    "de-indent": "^1.0.2"
   },
   "peerDependencies": {
     "babel-core": "^6.8.0",
