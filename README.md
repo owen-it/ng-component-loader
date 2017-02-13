@@ -98,3 +98,6 @@ angular.module('app', [])
 <page-header></page-header>
 ```
 
+### License
+
+[MIT](http://opensource.org/licenses/MIT)
