@@ -9,7 +9,7 @@
   },
   "scripts": {
     "test": "eslint src && mocha test/test.js --slow 5000 --timeout 10000",
-    "test-util": "eslint src && mocha test/test-util.js --slow 5000 --timeout 10000"
+    "publish": "npm version patch && npm publish"
   },
   "keywords": [
     "angular",
