@@ -1,6 +1,6 @@
 > Note: Working on it...
 
-# ng-component-loader
+# ng-component-loader [![npm package](https://img.shields.io/npm/v/ng-component-loader.svg)](https://www.npmjs.com/package/ng-component-loader)
 
 `ng-component-loader` is a loader for Webpack that can transform Angular Components into a plain JavaScript module.
 
