@@ -8,8 +8,7 @@
     "url": "https://github.com/owen-it/ng-component-loader.git"
   },
   "scripts": {
-    "test": "eslint src && mocha test/test.js --slow 5000 --timeout 10000",
-    "publish": "npm version patch && npm publish"
+    "test": "eslint src && mocha test/test.js --slow 5000 --timeout 10000"
   },
   "keywords": [
     "angular",
