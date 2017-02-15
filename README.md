@@ -48,7 +48,7 @@ module.exports = {
 
 ### Angular Component
 
-In AngularJS, a Component is a special kind of {@link guide/directive directive} that uses a simpler
+In AngularJS, a Component is a special kind of [directive](https://docs.angularjs.org/guide/directive) that uses a simpler
 configuration which is suitable for a component-based application structure.
 
 This makes it easier to write an app in a way that's similar to using Web Components or using the new Angular's
@@ -89,7 +89,7 @@ A *.ng file is a custom file format that uses HTML-like syntax to describe a ang
 </script>
 ```
 
-ng-component-loader will parse the file, extract each language block, pipe them through other loaders if necessary, and finally assemble them back into a CommonJS module whose module.exports is a ng component options object.
+ng-component-loader will parse the file, extract each language block, pipe them through other loaders if necessary, and finally assemble them back into a CommonJS module whose module.exports is a [AngularJs Component](https://docs.angularjs.org/guide/component) options object.
 
 ### Language Blocks
 
