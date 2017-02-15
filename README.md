@@ -169,7 +169,7 @@ tra
 
 You can treat `*.ng` files as HTML in your editor.
 
-
+![syntax-highlighting](https://github.com/owen-it/ng-component-loader/blob/master/syntax-highlighting.png)
 
 ### License
 
