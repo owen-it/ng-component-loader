@@ -64,7 +64,7 @@ You can see the full documentation [here](https://docs.angularjs.org/guide/compo
 
 ##### The `*.ng` file
 
-A *.ng file is a custom file format that uses HTML-like syntax to describe a angular component. Each *.ng file consists of three types of top-level language blocks: `<template>`, `<script>` and `<style>`:
+A `*.ng` file is a custom file format that uses HTML-like syntax to describe a angular component. Each `*.ng` file consists of three types of top-level language blocks: `<template>`, `<script>` and `<style>`:
 
 ```html
 <!-- ./src/components/my-component.ng -->
@@ -99,7 +99,7 @@ ng-component-loader will parse the file, extract each language block, pipe them 
 
 - Each `*.ng` file can contain at most one `<template>` block at a time.
 
-- Contents will be extracted as a string and used as the `template` option for the compiled Vue component.
+- Contents will be extracted as a string and used as the `template` option for the compiled AngularJs Component.
 
 #### `<script>`
 
@@ -155,7 +155,7 @@ angular.module('app', []).component.apply(this, myComponent);
 tra
 - Default Language: `css`.
 
-- Multiple `<style>` tags are supported in a single `*.vue` file.
+- Multiple `<style>` tags are supported in a single `*.ng` file.
 
 - A `<style>` tag can have `scoped` or `module` attributes (see [Scoped CSS](../features/scoped-css.md) and [CSS Modules](../features/css-modules.md)) to help encapsulating the styles to the current component. Multiple `<style>` tags with different encapsulation modes can be mixed in the same component.
 
