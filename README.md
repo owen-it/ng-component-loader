@@ -152,7 +152,7 @@ angular.module('app', []).component.apply(this, myComponent);
 ```
 
 #### `<style>`
-tra
+
 - Default Language: `css`.
 
 - Multiple `<style>` tags are supported in a single `*.ng` file.
