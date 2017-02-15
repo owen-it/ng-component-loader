@@ -52,7 +52,7 @@ In AngularJS, a Component is a special kind of directive that uses a simpler con
 
 ##### The `*.ng` file
 
-A *.ng file is a custom file format that uses HTML-like syntax to describe a angular component. Each *.ng file consists of three types of top-level language blocks: <template>, <script>, and <style>:
+A *.ng file is a custom file format that uses HTML-like syntax to describe a angular component. Each *.ng file consists of three types of top-level language blocks: `<template>`, `<script>` and `<style>`:
 
 ```html
 <!-- ./src/components/my-component.ng -->
