@@ -20,7 +20,7 @@ npm install --save-dev ng-component-loader
 
 ## Usage
 
-Use the loader either via your webpack config, CLI or inline.
+Use the loader either via your Webpack config.
 
 #### Via webpack config (recommended)
 
