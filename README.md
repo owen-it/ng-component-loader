@@ -169,7 +169,7 @@ angular.module('app', []).component.apply(this, myComponent);
 
 You can treat `*.ng` files as HTML in your editor.
 
-![syntax-highlighting](https://github.com/owen-it/ng-component-loader/blob/master/syntax-highlighting.png)
+![syntax-highlighting](https://raw.githubusercontent.com/owen-it/ng-component-loader/master/syntax-highlighting.png)
 
 ### License
 
