@@ -48,7 +48,19 @@ module.exports = {
 
 ### Angular Component
 
-In AngularJS, a Component is a special kind of directive that uses a simpler configuration which is suitable for a component-based application structure. 
+In AngularJS, a Component is a special kind of {@link guide/directive directive} that uses a simpler
+configuration which is suitable for a component-based application structure.
+
+This makes it easier to write an app in a way that's similar to using Web Components or using the new Angular's
+style of application architecture.
+
+Advantages of Components:
+- simpler configuration than plain directives
+- promote sane defaults and best practices
+- optimized for component-based architecture
+- writing component directives will make it easier to upgrade to Angular
+
+You can see the full documentation [here](https://docs.angularjs.org/guide/component).
 
 ##### The `*.ng` file
 
