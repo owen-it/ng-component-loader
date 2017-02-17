@@ -76,6 +76,7 @@
     "mocha": "^3.2.0",
     "node-libs-browser": "^2.0.0",
     "normalize-newline": "^3.0.0",
+    "ng-hot-reload-api": "^0.0.2",
     "postcss": "^5.0.21",
     "pug": "^2.0.0-beta6",
     "stylus": "^0.54.5",
