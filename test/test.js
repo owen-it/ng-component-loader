@@ -80,7 +80,7 @@ describe('ng-component-loader', function(){
     it('Should return message', function (done){
 
         build({}, window => {
-            var component = window.ngComponent[1]
+            var component = window.ngComponent.default[1]
 
             expect(component.controller().msg).to.be.eq('Working!!')
 
@@ -92,7 +92,7 @@ describe('ng-component-loader', function(){
     it('Should return template', function (done){
 
         build({}, window => {
-            var component = window.ngComponent[1]
+            var component = window.ngComponent.default[1]
 
             expect(component.template).to.contain('{{ msg }}')
 

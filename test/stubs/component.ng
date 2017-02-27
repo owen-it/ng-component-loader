@@ -1,16 +1,10 @@
-<style>
-    h1 {
-        color: #8f8f8f;
-    }
-</style>
-
 <template lang="jade">
     h1 {{ msg }}
 </template>
 
 <script>
 
-    module.exports = ['componentA', {
+    export default ['componentA', {
         bidings: {},
         controller: function(){
             return {
@@ -20,3 +14,9 @@
     }]
 
 </script>
+
+<style>
+    h1 {
+        color: #8f8f8f;
+    }
+</style>
