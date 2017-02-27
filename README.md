@@ -153,11 +153,9 @@ angular.module('app', []).component.apply(this, myComponent);
 
 #### `<style>`
 
-- Default Language: `css`.
-
-- Multiple `<style>` tags are supported in a single `*.ng` file.
-
-- By default, contents will be extracted and dynamically inserted into the document's `<head>` as an actual `<style>` tag using `style-loader`.
+- Default Language: `css`;
+- Multiple `<style>` tags are supported in a single `*.ng` file;
+- By default, contents will be extracted and dynamically inserted into the document's `<head>` as an actual `<style>` tag using `style-loader`;
 
 #### The component
 
