@@ -1,6 +1,6 @@
 {
   "name": "ng-component-loader",
-  "version": "1.0.36",
+  "version": "1.0.37",
   "description": "Webpack loader for AngularJs components",
   "main": "index.js",
   "repository": {
